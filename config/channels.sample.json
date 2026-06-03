@@ -1,0 +1,80 @@
+{
+  "postingDefaults": {
+    "privacyStatus": "private",
+    "requireManualApproval": true,
+    "uploadDryRun": true,
+    "cadence": "3 shorts/week for 14 days, then double down on winners",
+    "approvalChecklist": [
+      "No copyrighted footage/audio unless licensed or generated in-house",
+      "No fake stats, fake credentials, or fabricated claims",
+      "No medical/legal/financial advice without disclaimers",
+      "Title/thumbnail/script match the actual video",
+      "Upload as private first, review on YouTube Studio, then schedule/public"
+    ]
+  },
+  "channels": [
+    {
+      "id": "agent-ops-lab",
+      "workingName": "Agent Ops Lab",
+      "nicheType": "B2B AI automation / coding-agent operations",
+      "thesis": "Practical AI-agent workflows are exploding, but most creators stay abstract. Win with concrete demos, failure modes, and tool comparisons for operators.",
+      "targetAudience": "founders, operators, engineers, and creators who want practical AI agent workflows",
+      "formats": ["60-90s Shorts", "3-6 min walkthroughs"],
+      "contentPillars": [
+        "agent workflow teardown",
+        "tool/repo test drive",
+        "automation failure and fix",
+        "prompt/process template"
+      ],
+      "sampleTopics": [
+        "I gave an AI agent one business task and graded the receipts",
+        "The 5-step approval gate every autonomous agent needs",
+        "What happens when a coding agent ships without tests"
+      ],
+      "riskNotes": ["Avoid fake product claims; verify live tool behavior before posting"],
+      "youtubeCredentialProfile": "agent-ops-lab"
+    },
+    {
+      "id": "probability-briefs",
+      "workingName": "Probability Briefs",
+      "nicheType": "prediction markets / data-driven current events",
+      "thesis": "People want market-implied odds explained simply. Use charts and concise narration, with strict educational disclaimers.",
+      "targetAudience": "curious investors, data nerds, prediction-market users, and business news watchers",
+      "formats": ["45-75s Shorts", "weekly 4-7 min market recap"],
+      "contentPillars": [
+        "one market in 60 seconds",
+        "odds moved because...",
+        "consensus vs market price",
+        "data caveat/explainer"
+      ],
+      "sampleTopics": [
+        "This market says the consensus is wrong",
+        "How prediction markets price a surprise before headlines",
+        "The simplest way to read implied probability"
+      ],
+      "riskNotes": ["Educational only; not financial advice; cite market data source and timestamp"],
+      "youtubeCredentialProfile": "probability-briefs"
+    },
+    {
+      "id": "classroom-workflow-lab",
+      "workingName": "Classroom Workflow Lab",
+      "nicheType": "teacher productivity / classroom systems",
+      "thesis": "Teachers need time-saving workflows, not generic AI hype. Create practical classroom organization and content-prep videos for educators.",
+      "targetAudience": "elementary teachers, teacher-creators, and education entrepreneurs",
+      "formats": ["45-90s Shorts", "3-5 min tutorials"],
+      "contentPillars": [
+        "teacher workflow hack",
+        "lesson prep template",
+        "classroom organization system",
+        "AI-assisted admin cleanup"
+      ],
+      "sampleTopics": [
+        "A 10-minute system for Monday lesson prep",
+        "Turn one worksheet into a week of warmups",
+        "The teacher inbox triage workflow I would automate first"
+      ],
+      "riskNotes": ["Audience is teachers, not children; avoid collecting student data or showing real student info"],
+      "youtubeCredentialProfile": "classroom-workflow-lab"
+    }
+  ]
+}

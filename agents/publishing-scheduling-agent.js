@@ -1,5 +1,6 @@
 const { google } = require('googleapis');
 const fs = require('fs').promises;
+const fsSync = require('fs');
 const path = require('path');
 const { Logger } = require('../utils/logger');
 
@@ -83,9 +84,21 @@ class PublishingSchedulingAgent {
       if (!scheduleEntry) {
         throw new Error(`Content not found in queue: ${contentId}`);
       }
+
+      if (this.requiresManualApproval() && !this.hasManualApproval(scheduleEntry)) {
+        throw new Error(`Manual approval required before publishing: ${contentId}`);
+      }
       
-      // Upload video to YouTube
+      // Upload video to YouTube, or simulate if dry-run mode is enabled.
       const uploadResult = await this.uploadToYouTube(scheduleEntry);
+
+      if (uploadResult.dryRun) {
+        scheduleEntry.status = 'dry_run';
+        scheduleEntry.error = null;
+        await this.db.updateScheduleEntry(scheduleEntry);
+        this.logger.warn(`Dry-run upload only; no YouTube video was created for: ${scheduleEntry.title}`);
+        return { ...scheduleEntry, uploadResult };
+      }
       
       // Update database
       scheduleEntry.status = 'published';
@@ -106,8 +119,56 @@ class PublishingSchedulingAgent {
     }
   }
 
+  isUploadDryRun() {
+    return String(process.env.YOUTUBE_UPLOAD_DRY_RUN || 'true').toLowerCase() !== 'false';
+  }
+
+  requiresManualApproval() {
+    return String(process.env.REQUIRE_MANUAL_APPROVAL || 'true').toLowerCase() !== 'false';
+  }
+
+  hasManualApproval(scheduleEntry) {
+    return Boolean(
+      scheduleEntry.approved === true ||
+      scheduleEntry.approvedAt ||
+      scheduleEntry.metadata?.approval?.status === 'approved' ||
+      scheduleEntry.metadata?.approved === true
+    );
+  }
+
+  isAutoPublishEnabled() {
+    return String(process.env.AUTO_PUBLISH_ENABLED || 'false').toLowerCase() === 'true';
+  }
+
   async uploadToYouTube(scheduleEntry) {
     const { metadata } = scheduleEntry;
+
+    if (!metadata?.seo) {
+      throw new Error('Missing SEO metadata for YouTube upload');
+    }
+
+    if (!metadata?.video?.path) {
+      throw new Error('Missing final video path for YouTube upload');
+    }
+
+    const videoPath = metadata.video.path;
+    const resolvedVideoPath = path.isAbsolute(videoPath) ? videoPath : path.join(__dirname, '..', videoPath);
+
+    if (!fsSync.existsSync(resolvedVideoPath)) {
+      throw new Error(`Final video file not found: ${resolvedVideoPath}`);
+    }
+
+    if (this.isUploadDryRun()) {
+      return {
+        dryRun: true,
+        id: `dry_run_${Date.now()}`,
+        title: metadata.seo.title,
+        privacyStatus: process.env.DEFAULT_PRIVACY_STATUS || 'private',
+        videoPath: resolvedVideoPath,
+        thumbnailPath: metadata.thumbnail?.path || null,
+        captionsPath: metadata.captions?.path || null
+      };
+    }
     
     // Prepare video metadata
     const videoMetadata = {
@@ -115,12 +176,12 @@ class PublishingSchedulingAgent {
         title: metadata.seo.title,
         description: metadata.seo.description,
         tags: metadata.seo.tags,
-        categoryId: metadata.seo.metadata.category.toString(),
-        defaultLanguage: metadata.seo.metadata.language,
-        defaultAudioLanguage: metadata.seo.metadata.language
+        categoryId: String(metadata.seo.metadata?.category || '27'),
+        defaultLanguage: metadata.seo.metadata?.language || 'en',
+        defaultAudioLanguage: metadata.seo.metadata?.language || 'en'
       },
       status: {
-        privacyStatus: process.env.DEFAULT_PRIVACY_STATUS || 'public',
+        privacyStatus: process.env.DEFAULT_PRIVACY_STATUS || 'private',
         publishAt: scheduleEntry.publishTime,
         selfDeclaredMadeForKids: false
       }
@@ -131,7 +192,7 @@ class PublishingSchedulingAgent {
       part: 'snippet,status',
       requestBody: videoMetadata,
       media: {
-        body: await this.getVideoStream(metadata.video.path)
+        body: await this.getVideoStream(resolvedVideoPath)
       }
     });
     
@@ -152,13 +213,7 @@ class PublishingSchedulingAgent {
   }
 
   async getVideoStream(videoPath) {
-    // In a real implementation, this would return a file stream
-    // For now, we'll simulate it
-    return JSON.stringify({
-      message: 'Video stream would be provided here',
-      path: videoPath,
-      timestamp: new Date().toISOString()
-    });
+    return fsSync.createReadStream(videoPath);
   }
 
   async uploadThumbnail(videoId, thumbnailPath) {
@@ -205,6 +260,11 @@ class PublishingSchedulingAgent {
 
   async processPublishQueue() {
     this.logger.info('Processing publish queue...');
+
+    if (!this.isAutoPublishEnabled()) {
+      this.logger.warn('Auto-publishing is disabled. Queue will wait for manual approval/publish.');
+      return 0;
+    }
     
     const now = new Date();
     const readyToPublish = this.publishQueue.filter(entry => {

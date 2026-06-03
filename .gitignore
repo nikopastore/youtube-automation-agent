@@ -10,6 +10,7 @@ yarn-error.log*
 .env.production
 config/credentials.json
 config/tokens.json
+config/youtube/
 config/*.key
 config/*.pem
 
@@ -30,7 +31,8 @@ data/*.db-journal
 logs/
 *.log
 
-# Temporary files
+# Temporary and generated run outputs
+runs/
 temp/
 tmp/
 uploads/

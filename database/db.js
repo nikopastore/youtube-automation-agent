@@ -197,7 +197,7 @@ class Database {
   async insertDefaultSettings() {
     const defaultSettings = [
       ['daily_content_enabled', 'true', 'Enable daily content generation'],
-      ['auto_publish_enabled', 'true', 'Enable automatic publishing'],
+      ['auto_publish_enabled', 'false', 'Enable automatic publishing after review'],
       ['analytics_enabled', 'true', 'Enable analytics collection'],
       ['optimization_enabled', 'true', 'Enable automatic optimization'],
       ['publish_time_optimization', 'true', 'Optimize publishing times automatically'],

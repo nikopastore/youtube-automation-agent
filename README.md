@@ -1,6 +1,8 @@
 # 🎬 YouTube Automation Agent
 
 > Fork note: this fork adds a safer `niche-lab/` validation layer before any publishing automation. See [`FORK_NOTES.md`](./FORK_NOTES.md). The lab tests niches, identifies viral clip opportunities from transcript/video intel, and performs trend research without downloading media or auto-uploading.
+>
+> Multi-channel launch note: this fork now includes a safer 2-3 channel launch workflow in [`docs/multi-channel-launch.md`](./docs/multi-channel-launch.md), plus `npm run channels:plan`, `npm run channels:batch`, and `npm run channels:check`.
 
 A fully automated YouTube channel management system that creates, optimizes, and publishes content daily using AI agents. No coding required - just configure and let the AI agents handle your YouTube channel 24/7!
 
