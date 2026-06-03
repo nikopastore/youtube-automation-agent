@@ -1,0 +1,152 @@
+{
+  "experimentName": "youtube-niche-lab-sample",
+  "niches": [
+    {
+      "name": "AI Agent Tools for Founders",
+      "audience": "solo founders, operators, and builders who want practical AI automation",
+      "contentFormats": [
+        "shorts",
+        "tool breakdowns",
+        "workflow tutorials"
+      ],
+      "monetizationPaths": [
+        "paid community",
+        "affiliate tools",
+        "consulting",
+        "templates"
+      ],
+      "constraints": [
+        "cite source repos",
+        "avoid fake benchmarks",
+        "show operational receipts"
+      ],
+      "seedTopics": [
+        "coding agents",
+        "browser automation",
+        "MCP workflows",
+        "agent memory"
+      ]
+    },
+    {
+      "name": "Personal Finance for Teachers",
+      "audience": "teachers and education workers who want simple money systems",
+      "contentFormats": [
+        "shorts",
+        "explainers",
+        "checklists"
+      ],
+      "monetizationPaths": [
+        "digital planners",
+        "courses",
+        "sponsors"
+      ],
+      "constraints": [
+        "no individualized financial advice",
+        "plain-language disclaimers"
+      ],
+      "seedTopics": [
+        "budget routines",
+        "teacher side hustles",
+        "retirement basics"
+      ]
+    },
+    {
+      "name": "Phoenix Weekend Micro-Adventures",
+      "audience": "Phoenix locals looking for low-cost weekend ideas",
+      "contentFormats": [
+        "shorts",
+        "listicles",
+        "maps"
+      ],
+      "monetizationPaths": [
+        "local sponsors",
+        "affiliate bookings",
+        "newsletter"
+      ],
+      "constraints": [
+        "verify hours/prices",
+        "avoid unsafe heat recommendations"
+      ],
+      "seedTopics": [
+        "hidden restaurants",
+        "desert walks",
+        "family activities"
+      ]
+    },
+    {
+      "name": "Snowflake Data Engineering Tips",
+      "audience": "data engineers and analytics engineers using Snowflake",
+      "contentFormats": [
+        "tutorials",
+        "shorts",
+        "debugging breakdowns"
+      ],
+      "monetizationPaths": [
+        "consulting",
+        "templates",
+        "course",
+        "job board"
+      ],
+      "constraints": [
+        "do not expose employer data",
+        "keep examples synthetic"
+      ],
+      "seedTopics": [
+        "cost optimization",
+        "tasks and streams",
+        "dbt patterns",
+        "ETL debugging"
+      ]
+    },
+    {
+      "name": "Kids Science Bedtime Stories",
+      "audience": "parents of elementary-age kids who want educational bedtime content",
+      "contentFormats": [
+        "animated shorts",
+        "story videos",
+        "printable activities"
+      ],
+      "monetizationPaths": [
+        "printables",
+        "membership",
+        "book sales"
+      ],
+      "constraints": [
+        "child-safe language",
+        "no medical claims",
+        "gentle pacing"
+      ],
+      "seedTopics": [
+        "space stories",
+        "animal facts",
+        "weather",
+        "simple machines"
+      ]
+    },
+    {
+      "name": "Prediction Market Explainers",
+      "audience": "curious investors and news junkies learning prediction markets",
+      "contentFormats": [
+        "shorts",
+        "market breakdowns",
+        "weekly recaps"
+      ],
+      "monetizationPaths": [
+        "newsletter",
+        "analytics subscription",
+        "sponsorships"
+      ],
+      "constraints": [
+        "not financial advice",
+        "avoid gambling framing",
+        "cite market sources"
+      ],
+      "seedTopics": [
+        "election markets",
+        "sports probabilities",
+        "market mispricing",
+        "risk management"
+      ]
+    }
+  ]
+}

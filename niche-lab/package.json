@@ -1,0 +1,19 @@
+{
+  "name": "youtube-niche-lab",
+  "version": "0.1.0",
+  "description": "Safe planning simulator for testing YouTube niche/account concepts with six AI-agent-style stages.",
+  "type": "module",
+  "bin": {
+    "youtube-niche-lab": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node dist/test/run-tests.js",
+    "run:demo": "npm run build && node dist/cli.js demo"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "typescript": "^5.4.5"
+  }
+}

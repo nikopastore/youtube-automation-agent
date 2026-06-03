@@ -18,7 +18,12 @@
     "workflow:daily": "node workflows/daily-content-pipeline.js",
     "workflow:weekly": "node workflows/weekly-strategy-review.js",
     "db:init": "node database/init.js",
-    "credentials:setup": "node utils/credential-manager.js setup"
+    "credentials:setup": "node utils/credential-manager.js setup",
+    "lab:install": "cd niche-lab && npm install",
+    "lab:test": "cd niche-lab && npm test",
+    "lab:demo": "cd niche-lab && npm run run:demo",
+    "lab:clips": "cd niche-lab && npm run build && node dist/cli.js clips --input config/video-intel.sample.json --out runs/demo-intel/clips",
+    "lab:trends": "cd niche-lab && npm run build && node dist/cli.js trends --input config/video-intel.sample.json --out runs/demo-intel/trends"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^3.0.0",
@@ -39,7 +44,8 @@
     "playwright": "^1.54.2",
     "replicate": "^1.0.1",
     "sqlite3": "^5.1.6",
-    "winston": "^3.11.0"
+    "winston": "^3.11.0",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

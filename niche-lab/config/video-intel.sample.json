@@ -1,0 +1,132 @@
+{
+  "niche": "AI agent tools for founders",
+  "videos": [
+    {
+      "id": "ai-agent-demo",
+      "title": "AI Agent Workflow Breakdown",
+      "platform": "youtube",
+      "url": "https://www.youtube.com/watch?v=sample",
+      "creator": "Niche Lab",
+      "durationSeconds": 220,
+      "publishedAt": "2026-05-28T12:00:00.000Z",
+      "signals": [
+        {
+          "metric": "views",
+          "value": 125000,
+          "weight": 0.8,
+          "reason": "Strong view count for a practical workflow video"
+        },
+        {
+          "metric": "engagementRate",
+          "value": 0.08,
+          "weight": 0.7,
+          "reason": "Above-average engagement rate"
+        }
+      ],
+      "transcriptSegments": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 12,
+          "text": "Today we are walking through a normal setup for AI agents."
+        },
+        {
+          "startSeconds": 12,
+          "endSeconds": 28,
+          "text": "Most founders make this expensive mistake when they automate too early."
+        },
+        {
+          "startSeconds": 28,
+          "endSeconds": 45,
+          "text": "Here are three fixes that saved our test workflow ten hours a week."
+        },
+        {
+          "startSeconds": 45,
+          "endSeconds": 62,
+          "text": "The surprising part is that the simplest prompt beat the complex tool chain."
+        },
+        {
+          "startSeconds": 62,
+          "endSeconds": 78,
+          "text": "Now let us compare the dashboard and summarize the tradeoffs."
+        },
+        {
+          "startSeconds": 78,
+          "endSeconds": 96,
+          "text": "Do not copy random viral templates; use this checklist before you publish."
+        }
+      ]
+    },
+    {
+      "id": "finance-risk-example",
+      "title": "Finance Claim Review Example",
+      "platform": "youtube",
+      "creator": "Licensed Partner",
+      "durationSeconds": 80,
+      "publishedAt": "2026-04-01T12:00:00.000Z",
+      "signals": [
+        {
+          "metric": "views",
+          "value": 5000,
+          "weight": 0.3,
+          "reason": "Small but useful baseline"
+        }
+      ],
+      "transcriptSegments": [
+        {
+          "startSeconds": 0,
+          "endSeconds": 10,
+          "text": "This stock will double next month if you follow this strategy."
+        },
+        {
+          "startSeconds": 10,
+          "endSeconds": 18,
+          "text": "The lesson is to understand risk before copying a trade."
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "agent-memory-youtube",
+      "source": "YouTube",
+      "title": "Agent memory workflows",
+      "url": "https://example.com/agent-memory",
+      "topic": "agent memory",
+      "publishedAt": "2026-06-01T12:00:00.000Z",
+      "observedAt": "2026-06-02T08:00:00.000Z",
+      "velocity": 9,
+      "relevance": 10,
+      "contentSupply": 8,
+      "metrics": {
+        "views": 180000,
+        "comments": 900
+      }
+    },
+    {
+      "id": "agent-memory-reddit",
+      "source": "Reddit",
+      "title": "Founders comparing agent memory tools",
+      "topic": "agent memory",
+      "observedAt": "2026-06-01T18:00:00.000Z",
+      "velocity": 8,
+      "relevance": 9,
+      "contentSupply": 7,
+      "metrics": {
+        "upvotes": 2400
+      }
+    },
+    {
+      "id": "browser-automation-tiktok",
+      "source": "TikTok",
+      "title": "Browser automation macros",
+      "topic": "browser automation",
+      "observedAt": "2026-05-31T18:00:00.000Z",
+      "velocity": 7,
+      "relevance": 8,
+      "contentSupply": 9,
+      "metrics": {
+        "views": 60000
+      }
+    }
+  ]
+}
