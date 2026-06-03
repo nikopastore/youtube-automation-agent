@@ -119,6 +119,13 @@ config/youtube/weird-why-facts/tokens.json
 
 `npm run channels:check` verifies which profiles are ready.
 
+For the full Google Cloud project + Brand Account + OAuth walkthrough, see `docs/youtube-channel-setup.md`. To generate a token after creating a channel's `credentials.json`:
+
+```bash
+npm run channels:auth -- --channel mind-melt-quiz
+npm run channels:auth -- --channel weird-why-facts
+```
+
 ## What was improved in the original agent
 
 - Default upload privacy changed from `public` to `private`.

@@ -26,7 +26,8 @@
     "lab:trends": "cd niche-lab && npm run build && node dist/cli.js trends --input config/video-intel.sample.json --out runs/demo-intel/trends",
     "channels:plan": "node scripts/channel-ops.js plan --config config/channels.sample.json --out runs/channel-launch",
     "channels:batch": "node scripts/channel-ops.js batch --config config/channels.sample.json --count 3 --out runs/channel-launch",
-    "channels:check": "node scripts/channel-ops.js check-credentials --config config/channels.sample.json --out runs/channel-launch"
+    "channels:check": "node scripts/channel-ops.js check-credentials --config config/channels.sample.json --out runs/channel-launch",
+    "channels:auth": "node scripts/youtube-auth.js"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^3.0.0",
