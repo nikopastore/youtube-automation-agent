@@ -1,12 +1,41 @@
 # Multi-Channel Launch Playbook
 
-This fork now treats the original automation agent as the production engine and adds a safer launch layer for testing 2-3 YouTube channel niches.
+This fork now treats the original automation agent as the production engine and adds a safer launch layer for testing YouTube channel niches. The starter config is `config/channels.sample.json`.
 
-## Core rule
+## Current experiment: 2 viral-safe niches
 
-Do **not** let the agent auto-publish public videos during the testing phase.
+We picked niches that have proven brainrot replay/share value AND are safe to run with an automated, faceless, fully-original-content pipeline. This is the only combination that survives both the YouTube algorithm and YouTube's monetization policy at the same time.
 
-Default safety settings:
+### Channel 1 — Mind Melt (`mind-melt-quiz`)
+
+- **Format:** Quiz / trivia / brain-teaser / would-you-rather Shorts
+- **Why it works:** The comment section becomes the game. People argue, defend, replay to prove a point. Massive rewatch + share signal.
+- **Examples:** "Only 1% can guess the country from this outline", "3 facts, 1 is fake — pick it", "Would you rather: lose $1,000 or gain 10 years?"
+- **Why it is safe:** Original questions only, original scripts, AI-generated visuals, no copyrighted footage.
+
+### Channel 2 — Weird Why (`weird-why-facts`)
+
+- **Format:** Science / space / psychology "wait what" explainer Shorts
+- **Why it works:** The twist is the payoff. First watch sells the setup, second watch is the share.
+- **Examples:** "This planet literally rains glass sideways", "Your brain deletes most of what you see", "The country that almost existed in 2025"
+- **Why it is safe:** Fact-checked sources, no scary medical or political content, no kid-themed framing.
+
+## Why not the more obvious viral niches
+
+These were considered and rejected. The risk-reward does not beat the pair above.
+
+| Niche | Why not |
+|---|---|
+| Reddit AITA / storytime using real Reddit posts | Copyright and "reused content" risk under YouTube monetization policy |
+| Movie / TV / anime recaps | Copyright and reused content |
+| Sports highlights | Copyright |
+| True crime | Sensitive-event monetization risk |
+| Investment / crypto advice | Regulatory and claim risk |
+| Health / weight-loss advice | Medical-claim risk |
+| Celebrity gossip / drama | Defamation and image rights |
+| Kids content | Children-directed policy, COPPA, advertiser suitability |
+
+## The safety defaults
 
 ```env
 DEFAULT_PRIVACY_STATUS=private
@@ -15,27 +44,20 @@ AUTO_PUBLISH_ENABLED=false
 REQUIRE_MANUAL_APPROVAL=true
 ```
 
-That means the system can generate/channel-plan/batch content immediately, but real YouTube uploads stay private or dry-run until credentials and approval are configured.
+The system can generate content immediately, but real uploads stay private or dry-run until credentials and approval are confirmed.
 
-## Initial channel experiments
+## YouTube monetization policy reminder
 
-The starter config is `config/channels.sample.json`.
+YouTube explicitly flags these as risky:
 
-1. `agent-ops-lab` — B2B AI automation / coding-agent operations
-2. `probability-briefs` — prediction markets / data-driven current events
-3. `classroom-workflow-lab` — teacher productivity / classroom systems
+- Repetitive, mass-produced, or inauthentic content
+- Reused content without significant transformation
+- AI-generated content without original value
+- Compilations of others' footage with minimal commentary
 
-These are intentionally different niche types:
-
-- tech/operator audience
-- data/finance/news audience
-- teacher/productivity audience
-
-The goal is not to marry these names. The goal is to generate enough consistent content to compare velocity, CTR, retention, comments, and subscriber conversion.
+Our setup avoids all of these by producing original scripts, original AI visuals, and meaningful per-episode commentary.
 
 ## Commands
-
-From the repo root:
 
 ```bash
 npm run channels:plan
@@ -43,33 +65,19 @@ npm run channels:batch
 npm run channels:check
 ```
 
-Outputs go to:
+Outputs:
 
 ```text
 runs/channel-launch/
+  launch-plan.md
+  launch-plan.json
+  batch-summary.json
+  mind-melt-quiz/<episode>/script.md
+  mind-melt-quiz/<episode>/metadata.json
+  weird-why-facts/<episode>/script.md
+  weird-why-facts/<episode>/metadata.json
+  credential-check.json
 ```
-
-Important files:
-
-- `runs/channel-launch/launch-plan.md`
-- `runs/channel-launch/batch-summary.json`
-- `runs/channel-launch/<channel-id>/<episode-id>/script.md`
-- `runs/channel-launch/<channel-id>/<episode-id>/metadata.json`
-
-## YouTube credential layout
-
-For testing multiple YouTube channels, keep credentials separated by channel profile:
-
-```text
-config/youtube/agent-ops-lab/credentials.json
-config/youtube/agent-ops-lab/tokens.json
-config/youtube/probability-briefs/credentials.json
-config/youtube/probability-briefs/tokens.json
-config/youtube/classroom-workflow-lab/credentials.json
-config/youtube/classroom-workflow-lab/tokens.json
-```
-
-`npm run channels:check` verifies which credential profiles are ready.
 
 ## First posting workflow
 
@@ -80,8 +88,8 @@ config/youtube/classroom-workflow-lab/tokens.json
    ```
 
 2. Pick one episode from each channel.
-3. Generate/assemble the video asset.
-4. Upload as private or run dry-run upload first.
+3. Generate or assemble the video asset (TTS + AI visuals).
+4. Upload as private or run a dry-run upload first.
 5. Review in YouTube Studio:
    - title
    - description
@@ -96,20 +104,34 @@ config/youtube/classroom-workflow-lab/tokens.json
    - CTR
    - average view duration
    - first 3-second hold
-   - comments/subscribers per 1k views
+   - comments per 1k views
+   - shares per 1k views
+   - save rate
+
+## YouTube credential layout
+
+```text
+config/youtube/mind-melt-quiz/credentials.json
+config/youtube/mind-melt-quiz/tokens.json
+config/youtube/weird-why-facts/credentials.json
+config/youtube/weird-why-facts/tokens.json
+```
+
+`npm run channels:check` verifies which profiles are ready.
 
 ## What was improved in the original agent
 
 - Default upload privacy changed from `public` to `private`.
-- Real uploads now require actual video file streams instead of the original simulated JSON body.
+- Real uploads now use actual video file streams.
 - Added dry-run upload mode.
 - Added manual approval gate before publishing.
 - Added auto-publish off switch.
-- Added multi-channel launch config and batch episode pack generator.
+- Added multi-channel launch config and episode pack generator.
 
 ## Next build targets
 
 - Per-channel OAuth selection in the runtime publishing agent.
-- CLI command to convert generated episode packs into production queue entries.
-- Video assembly templates for Shorts: captioned slides, chart cards, b-roll prompts, and voiceover.
+- TTS pipeline (ElevenLabs or OpenAI) wired into the batch output.
+- AI visual pipeline (image gen + simple Ken Burns / parallax) for each storyboard beat.
 - Analytics importer that writes per-channel experiment metrics back into a scorecard.
+- Per-channel "winner formula" detector: surface topics with high replay and share.

@@ -46,11 +46,9 @@ function makeEpisode(channel, topic, index) {
   const title = topic.length > 95 ? `${topic.slice(0, 92)}...` : topic;
   const hook = makeHook(channel, topic, index);
   const pillar = channel.contentPillars[index % channel.contentPillars.length];
-  const disclaimer = channel.id === 'probability-briefs'
-    ? 'Educational only — not financial advice. Check source data before acting.'
-    : channel.id === 'classroom-workflow-lab'
-      ? 'Use with your own classroom policies. Do not include real student data.'
-      : 'Verify tools and claims in your own workflow before adopting.';
+  const disclaimer = channel.id === 'weird-why-facts'
+    ? 'Educational and entertainment only. Sources listed in description — verify before sharing.'
+    : 'Educational and entertainment only. Pause, replay, and comment your score.';
   const talkingPoints = makeTalkingPoints(channel, topic, index);
 
   const script = [
@@ -83,7 +81,7 @@ function makeEpisode(channel, topic, index) {
     seo: {
       description: `${title}\n\n${disclaimer}\n\nBuilt as an automated channel experiment.`,
       tags: makeTags(channel, topic),
-      categoryHint: channel.id === 'probability-briefs' ? 'News & Politics / Education' : 'Education / Science & Technology',
+      categoryHint: channel.id === 'weird-why-facts' ? 'Education / Science & Technology' : 'Entertainment / Education',
       defaultPrivacy: 'private'
     },
     approval: {
@@ -100,46 +98,32 @@ function makeEpisode(channel, topic, index) {
 
 function makeTalkingPoints(channel, topic, index) {
   const variants = {
-    'agent-ops-lab': [
+    'mind-melt-quiz': [
       {
-        setup: `I picked one real business task: ${topic}. The test is not whether the demo looks impressive — it is whether the agent leaves receipts.`,
-        demo: 'Score it on four things: the plan it made, the files or outputs it changed, the checks it ran, and the exact failure it reported instead of hiding.',
-        takeaway: 'If you cannot inspect the run log, tests, and final diff, you do not have an autonomous workflow — you have a black box.',
-        cta: 'Follow for one practical AI-agent test every week, with the boring operational details included.'
+        setup: `Round 1: ${topic}. The score is simple — right answers win, wrong answers go in the comments.`,
+        demo: 'Show the question, pause to let people answer, then reveal the answer with a one-line explanation or twist.',
+        takeaway: 'Quiz loops work because the comment section becomes the game — people argue, defend, and rewatch to prove a point.',
+        cta: 'Comment your score. We pick the most wrong / most right answer in the next Short.'
       },
       {
-        setup: `${topic} sounds like a small detail, but it is the difference between useful autonomy and chaos.`,
-        demo: 'My rule: no agent publishes, deploys, or messages a customer until the approval gate checks source, claim, owner, rollback, and test result.',
-        takeaway: 'Autonomy works better when the default path is draft → verify → approve, not draft → publish → apologize.',
-        cta: 'Subscribe if you want agent workflows that survive contact with real work.'
+        setup: `${topic} — and 90% of people fail the first one.`,
+        demo: 'Start with the hardest version, give a 2-second pause, then flip to an even harder twist question before the reveal.',
+        takeaway: 'Replay comes from the gap between confidence and the actual answer; let the pause be longer than feels natural.',
+        cta: 'Save this and send it to the friend who thinks they know everything.'
       }
     ],
-    'probability-briefs': [
+    'weird-why-facts': [
       {
-        setup: `${topic}. Here is the key: a market price is not a prophecy — it is a live estimate of probability.`,
-        demo: 'Look at the implied odds, the recent move, and the reason the move happened. If the price changed but the source did not, be careful.',
-        takeaway: 'The useful question is not “is the market right?” It is “what would need to happen for this price to be obviously wrong?”',
-        cta: 'Follow for simple market reads without the hype.'
+        setup: `${topic}. And no, the headline version is not the weird part.`,
+        demo: "Walk through the real mechanism in plain language, then drop the 'wait what' twist in the last 5 seconds.",
+        takeaway: 'The rewatch is the twist; the first watch sells the setup, the second watch is the payoff people share.',
+        cta: 'Follow for one weird-but-true fact every day, with a source in the description.'
       },
       {
-        setup: `${topic}. The headline tells one story; the odds tell another.`,
-        demo: 'Start with the current price, convert it to probability, compare it to consensus, then write down the one data point that would change your mind.',
-        takeaway: 'That habit keeps you from treating every price move like a prediction and every headline like evidence.',
-        cta: 'Subscribe for one probability brief at a time.'
-      }
-    ],
-    'classroom-workflow-lab': [
-      {
-        setup: `${topic}. The goal is not another teacher app — it is fewer open loops before Monday morning.`,
-        demo: 'Use three buckets: must teach, must prep, and can reuse. Then turn the reusable piece into a template before you make anything new.',
-        takeaway: 'The win is repeatability: one good template should save time every week, not just today.',
-        cta: 'Follow for teacher workflows that protect your planning time.'
-      },
-      {
-        setup: `${topic}. This works because it starts with the classroom routine, not the tool.`,
-        demo: 'Pick one repeated task, write the decision rules, make the first version manually, and only then automate the boring parts.',
-        takeaway: 'Automation should make the teacher more present, not turn the classroom into a dashboard.',
-        cta: 'Subscribe for practical classroom systems teachers can actually use.'
+        setup: `${topic}. Here is the part most explainers skip.`,
+        demo: 'Start with the everyday thing people think they know, then rebuild it correctly with one new piece of evidence per beat.',
+        takeaway: 'Originality comes from skipping the cliché framing and showing the step most people forget to mention.',
+        cta: 'Save this for the next time someone brings it up at dinner.'
       }
     ]
   };
@@ -154,20 +138,17 @@ function makeTalkingPoints(channel, topic, index) {
 
 function makeHook(channel, topic, index) {
   const hooks = {
-    'agent-ops-lab': [
-      `Most AI-agent demos hide this part.`,
-      `This is where autonomous agents usually fail.`,
-      `I tested the workflow so you do not have to.`
+    'mind-melt-quiz': [
+      `Only 1% of people can answer all of these.`,
+      `90% fail the first one. You?`,
+      `Pause now — the real question is at the end.`,
+      `Comment your score before the reveal.`
     ],
-    'probability-briefs': [
-      `This market is pricing something the headlines missed.`,
-      `The odds just moved — here is the simple read.`,
-      `One chart explains the whole market.`
-    ],
-    'classroom-workflow-lab': [
-      `Teachers: steal this workflow.`,
-      `This saves prep time without adding another app.`,
-      `Here is a classroom system I would automate first.`
+    'weird-why-facts': [
+      `This fact is going to ruin your day in the best way.`,
+      `No, you do not actually know how this works.`,
+      `The headline is wrong. Here is what is actually happening.`,
+      `Save this before the algorithm buries it.`
     ]
   };
   const list = hooks[channel.id] || [`Here is the useful part of ${firstWords(topic)}.`];
